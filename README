@@ -1,0 +1,22 @@
+Đây là file readme
+
+Cách chạy project
+
+Yêu cầu:
++) eclipse
++) java
++) Virtuoso server
+
+Cách bước:
+Khởi động Virtuoso server
+Mở eclipse và import project virtuoso với option là maven project
+Sau khi import, add to build path 2 thư viện ở thư mục /lib
+
+click chuột phải vào project, chọn vào maven -> update maven
+
+Ở class DatabaseConnect trong package com.virtuoso.connectdb
+đổi tên đăng nhập và pass như trong máy.
+
+click project -> run as -> java application để chạy 
+Chọn vào AppMain
+
