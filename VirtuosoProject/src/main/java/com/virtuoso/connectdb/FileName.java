@@ -16,7 +16,7 @@ public class FileName {
 	
 	final String ORGANIZATIONDESCRIPTION = "src/main/java/com/virtuoso/filegen/organizationDescription.txt";
 	final String ORGANIZATIONLABEL = "src/main/java/com/virtuoso/filegen/organizationLabel.txt";
-	final String HEADQUARTER = "src/main/java/com/virtuoso/filegen/headquarter.txt";
+	final String ORGANIZATIONHEADQUARTER = "src/main/java/com/virtuoso/filegen/organizationHeadquarter.txt";
 	
 	final String PERSONDESCRIPTION = "src/main/java/com/virtuoso/filegen/personDescription.txt";
 	final String PERSONLABEL = "src/main/java/com/virtuoso/filegen/personLabel.txt";

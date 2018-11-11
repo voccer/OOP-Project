@@ -1,7 +1,4 @@
 package com.virtuoso.connectdb;
-
-
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +28,7 @@ public class DatabaseGeneration {
 	
 	private static String organizationLabelFileName = fileName.ORGANIZATIONLABEL;
 	private static String organizationDescriptionFileName = fileName.ORGANIZATIONDESCRIPTION;
-	private static String headquarterFileName = fileName.HEADQUARTER;
+	private static String organizationHeadquarterFileName = fileName.ORGANIZATIONHEADQUARTER;
 	
 	private static String countryLabelFileName = fileName.COUNTRYLABEL;
 	private static String countryDescriptionFileName = fileName.COUNTRYDESCRIPTION;
@@ -59,7 +56,7 @@ public class DatabaseGeneration {
 		
 		genRandomEntity.setEntityGeneration(noLink, noDate);
 		genRandomEntity.setPersonGeneration(personLabelFileName, personDescriptionFileName, personStatusFileName);
-		genRandomEntity.setOrganizationGeneration(organizationLabelFileName, organizationDescriptionFileName, headquarterFileName);
+		genRandomEntity.setOrganizationGeneration(organizationLabelFileName, organizationDescriptionFileName, organizationHeadquarterFileName);
 		genRandomEntity.setCountryGeneration(countryLabelFileName, countryDescriptionFileName, countryContinentFileName);
 		genRandomEntity.setLocationGeneration(locationLabelFileName, locationDescriptionFileName);
 		genRandomEntity.setTimeGeneration(timeLabelFileName, timeDescriptionFileName);

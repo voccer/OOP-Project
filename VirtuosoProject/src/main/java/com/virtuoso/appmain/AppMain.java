@@ -10,6 +10,7 @@ import com.virtuoso.connectdb.DatabaseGeneration;
 public class AppMain {
 	public static void main(String[] args) throws FileNotFoundException {
 		System.out.println("Begin");
+		
 		int[] n = {100, 5000, 60000, 1000000, 15000000};
 		int[] m = {200, 7000, 80000, 2000000, 17000000};
 		long startTime = System.currentTimeMillis();
