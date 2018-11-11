@@ -11,7 +11,7 @@ import com.virtuoso.generateentity.GenRandomEntity;
 import com.virtuoso.relationship.GenRelationship;
 
 public class DatabaseGeneration {
-	private static final Random RANDOM = new Random();
+	private static Random RANDOM = new Random();
 	
 	private static int noEntity = 0;
 	private static int noRelationship = 0;
@@ -22,26 +22,27 @@ public class DatabaseGeneration {
 	
 	private static FileName fileName = new FileName();
 	
-	private static String personLabelFileName = fileName.PERSONLABEL;
-	private static String personDescriptionFileName = fileName.PERSONDESCRIPTION;
-	private static String personStatusFileName = fileName.PERSONSTATUS;
+	private static String personLabelFileName = fileName.PERSON_LABEL;
+	private static String personDescriptionFileName = fileName.PERSON_DESCRIPTION;
+	private static String personStatusFileName = fileName.PERSON_STATUS;
 	
-	private static String organizationLabelFileName = fileName.ORGANIZATIONLABEL;
-	private static String organizationDescriptionFileName = fileName.ORGANIZATIONDESCRIPTION;
-	private static String organizationHeadquarterFileName = fileName.ORGANIZATIONHEADQUARTER;
+	private static String organizationLabelFileName = fileName.ORGANIZATION_LABEL;
+	private static String organizationDescriptionFileName = fileName.ORGANIZATION_DESCRIPTION;
+	private static String organizationHeadquarterFileName = fileName.ORGANIZATION_HEADQUARTER;
 	
-	private static String countryLabelFileName = fileName.COUNTRYLABEL;
-	private static String countryDescriptionFileName = fileName.COUNTRYDESCRIPTION;
-	private static String countryContinentFileName = fileName.COUNTRYCONTINENT;
+	private static String countryLabelFileName = fileName.COUNTRY_LABEL;
+	private static String countryDescriptionFileName = fileName.COUNTRY_DESCRIPTION;
+	private static String countryContinentFileName = fileName.COUNTRY_CONTINENT;
 	
-	private static String locationLabelFileName = fileName.LOCATIONLABEL;
-	private static String locationDescriptionFileName = fileName.LOCATIONDESCRIPTION;
+	private static String locationLabelFileName = fileName.LOCATION_LABEL;
+	private static String locationDescriptionFileName = fileName.LOCATION_DESCRIPTION;
 	
-	private static String timeLabelFileName = fileName.TIMELABEL;
-	private static String timeDescriptionFileName = fileName.TIMEDESCRIPTION;
+	private static String timeLabelFileName = fileName.TIME_LABEL;
+	private static String timeDescriptionFileName = fileName.TIME_DESCRIPTION;
 	
-	private static String eventLabelFileName = fileName.EVENTLABEL;
-	private static String eventDescriptionFileName = fileName.EVENTDESCRIPTION;
+	private static String eventLabelFileName = fileName.EVENT_LABEL;
+	private static String eventDescriptionFileName = fileName.EVENT_DESCRIPTION;
+	
 	
 	private DatabaseConnection databaseConnect;
 	private GenRandomEntity genRandomEntity;
@@ -62,7 +63,7 @@ public class DatabaseGeneration {
 		genRandomEntity.setTimeGeneration(timeLabelFileName, timeDescriptionFileName);
 		genRandomEntity.setEventGeneration(eventLabelFileName, eventDescriptionFileName);
 		
-		genRelationship.setRelDescriptionList(fileName.RELATIONSHIPDESCRIPTION);
+		genRelationship.setRelDescriptionList(fileName.RELATIONSHIP_DESCRIPTION);
 		
 		entityIRIList = new ArrayList<>();
 	}

@@ -8,7 +8,7 @@ import com.virtuoso.entity.Entity;
 
 public class GenRandomEntity {
 	private static final Random RANDOM = new Random();
-	private static GenEntity ENTITY_GENERATION = new GenEntity();
+	private static final GenEntity ENTITY_GENERATION = new GenEntity();
 	private static final GenPerson PERSON_GENERATION = new GenPerson();
 	private static final GenOrganization ORGANIZATION_GENERATION = new GenOrganization();
 	private static final GenLocation LOCATION_GENERATION = new GenLocation();
@@ -17,7 +17,6 @@ public class GenRandomEntity {
 	private static final GenCountry COUNTRY_GENERATION = new GenCountry();
 
 	public GenRandomEntity() {
-
 	}
 
 	public void setEntityGeneration(int noLink, int noDate) {
@@ -25,7 +24,6 @@ public class GenRandomEntity {
 		ENTITY_GENERATION.setLinkList(noLink);	
 	}
 	
-	//Thiếu status file, bổ sung file status thì thêm vào đây
 	public void setPersonGeneration(String personLabelFileName, String personDescriptionFileName, String personStatusFileName) throws FileNotFoundException {
 		PERSON_GENERATION.setDescriptionList(personDescriptionFileName);
 		PERSON_GENERATION.setLabelList(personLabelFileName);

@@ -17,8 +17,10 @@ public class AppMain {
 		DatabaseGeneration databaseGeneration = new DatabaseGeneration();
 		databaseGeneration.clearStatements();
 		long endTime = System.currentTimeMillis();
+		
 		System.out.println("Time to init DatabaseGeneration: " + (endTime - startTime));
 		
+		System.exit(1);
 		for(int i = 0; i < 5; i++) {
 			databaseGeneration.generateDatabase(n[i], m[i]);
 			long time = databaseGeneration.getDatabaseConnect().queryStatementTime(null, RDF.TYPE, databaseGeneration.getDatabaseConnect().getPersonType(), null);
