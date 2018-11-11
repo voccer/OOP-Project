@@ -20,14 +20,16 @@ public class GenRandomEntity {
 
 	}
 
-	public void setEntityGeneration(int noLink, int noDate, String startDate) {
+	public void setEntityGeneration(int noLink, int noDate) {
 		ENTITY_GENERATION.setDateList(noDate);
-		ENTITY_GENERATION.setLinkList(noLink);
+		ENTITY_GENERATION.setLinkList(noLink);	
 	}
-
-	public void setPersonGeneration(String personLabelFileName, String personDescriptionFileName) throws FileNotFoundException {
+	
+	//Thiếu status file, bổ sung file status thì thêm vào đây
+	public void setPersonGeneration(String personLabelFileName, String personDescriptionFileName, String personStatusFileName) throws FileNotFoundException {
 		PERSON_GENERATION.setDescriptionList(personDescriptionFileName);
 		PERSON_GENERATION.setLabelList(personLabelFileName);
+		PERSON_GENERATION.setStatusList(personStatusFileName);
 	}
 
 	public void setOrganizationGeneration(String organizationLabelFileName, String organizationDescriptionFileName,
@@ -51,11 +53,15 @@ public class GenRandomEntity {
 		EVENT_GENERATION.setDescriptionList(eventDescriptionFileName);
 		EVENT_GENERATION.setLabelList(eventLabelFileName);
 	}
-
-	public void setCountryGeneration(String countryLabelFileName, String countryDescriptionFileName) throws FileNotFoundException {
+	
+	// Thiếu Continent file, bổ sung continent file thì thêm tham số vào đây.
+	
+	public void setCountryGeneration(String countryLabelFileName, String countryDescriptionFileName, String countryContinentFileName) throws FileNotFoundException {
 		COUNTRY_GENERATION.setLabelList(countryLabelFileName);
 		COUNTRY_GENERATION.setDescriptionList(countryDescriptionFileName);
+		COUNTRY_GENERATION.setContinentList(countryContinentFileName);
 	}
+	
 	public Entity generateRandomEntity() {
 		int random = RANDOM.nextInt(6);
 

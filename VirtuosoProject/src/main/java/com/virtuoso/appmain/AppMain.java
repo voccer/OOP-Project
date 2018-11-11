@@ -18,7 +18,7 @@ public class AppMain {
 		long endTime = System.currentTimeMillis();
 		System.out.println("Time to init DatabaseGeneration: " + (endTime - startTime));
 		
-		for(int i = 0; i < 2; i++) {
+		for(int i = 0; i < 5; i++) {
 			databaseGeneration.generateDatabase(n[i], m[i]);
 			long time = databaseGeneration.getDatabaseConnect().queryStatementTime(null, RDF.TYPE, databaseGeneration.getDatabaseConnect().getPersonType(), null);
 			System.out.println("Time to query in " + n[i] + " entities and " + m[i] + " relationship is " + time);

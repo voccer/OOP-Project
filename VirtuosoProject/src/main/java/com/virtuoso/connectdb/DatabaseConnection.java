@@ -2,13 +2,14 @@ package com.virtuoso.connectdb;
 
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.Literal;
+
 import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.ValueFactory;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.model.vocabulary.XMLSchema;
-import org.eclipse.rdf4j.query.QueryLanguage;
-import org.eclipse.rdf4j.query.TupleQueryResult;
+
+
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryResult;
@@ -23,21 +24,21 @@ import com.virtuoso.entity.Time;
 
 import virtuoso.rdf4j.driver.VirtuosoRepository;
 
-public class DatabaseConnect {
+public class DatabaseConnection {
 	private static final String URL = "jdbc:virtuoso://localhost:1111/";
 	private static final String USERNAME = "dba";
 	private static final String PASSWORD = "dba";
 	
 	//Bộ namespace chuẩn bị khởi tạo
-	private static String ontologyNamespace = "http://www.randomlink.org/ontology/";
-
-	private static String personNamespace = "http://www.randomlink.org/person/";
-	private static String organizationNamespace = "http://www.randomlink.org/organization/";
-	private static String locationNamespace = "http://www.randomlink.org/location/";
-	private static String countryNamespace = "http://www.randomlink.org/country/";
-	private static String timeNamespace = "http://www.randomlink.org/time/";
-	private static String eventNamespace = "http://www.randomlink.org/event/";
-	private static String relationshipNamespace = "http://randomlink.org/relationship/";
+	private static String ontologyNamespace = "http://www.example.com/ontology/";
+	
+	private static String personNamespace = "http://www.example.com/person/";
+	private static String organizationNamespace = "http://www.example.com/organization/";
+	private static String locationNamespace = "http://www.example.com/location/";
+	private static String countryNamespace = "http://www.example.com/country/";
+	private static String timeNamespace = "http://www.example.com/time/";
+	private static String eventNamespace = "http://www.example.com/event/";
+	private static String relationshipNamespace = "http://www.example.com/relationship/";
 	
 	//Bo ket noi va sinh IRI
 	private RepositoryConnection connection = null;
@@ -57,17 +58,16 @@ public class DatabaseConnect {
 	private IRI timeType;
 	private IRI eventType;
 		
-	public DatabaseConnect() {
+	public DatabaseConnection() {
 		Repository myRepository = new VirtuosoRepository(URL, USERNAME, PASSWORD);
-		
 		connection = myRepository.getConnection();
 
 		valueFactory =  connection.getValueFactory();
 		labelOntology = valueFactory.createIRI(ontologyNamespace, "label");
 		descriptionOntology = valueFactory.createIRI(ontologyNamespace, "description");
 
-		linkOntology = valueFactory.createIRI(ontologyNamespace, "extracted-link");
-		dateOntology = valueFactory.createIRI(ontologyNamespace, "extracted-date");
+		linkOntology = valueFactory.createIRI(ontologyNamespace, "link");
+		dateOntology = valueFactory.createIRI(ontologyNamespace, "date");
 		statusOntology = valueFactory.createIRI(ontologyNamespace, "status");
 		headquarterOntology = valueFactory.createIRI(ontologyNamespace, "headquarter");
 		
@@ -101,14 +101,14 @@ public class DatabaseConnect {
 		Literal label = valueFactory.createLiteral(person.getLabel());
 		Literal description = valueFactory.createLiteral(person.getDescription());
 		Literal link = valueFactory.createLiteral(person.getLink());
-		Literal time = valueFactory.createLiteral(person.getDate(), XMLSchema.DATE);
+		Literal date = valueFactory.createLiteral(person.getDate(), XMLSchema.DATE);
 		Literal status = valueFactory.createLiteral(person.getStatus());
 		
 		connection.add(iri, RDF.TYPE, personType );
 		connection.add(iri, labelOntology, label);
 		connection.add(iri, descriptionOntology, description);
 		connection.add(iri, linkOntology, link);
-		connection.add(iri, dateOntology, time);
+		connection.add(iri, dateOntology, date);
 		connection.add(iri, statusOntology, status);
 		
 		return iri;
@@ -119,14 +119,14 @@ public class DatabaseConnect {
 		Literal label = valueFactory.createLiteral(organization.getLabel());
 		Literal description = valueFactory.createLiteral(organization.getDescription());
 		Literal link = valueFactory.createLiteral(organization.getLink());
-		Literal time = valueFactory.createLiteral(organization.getDate(), XMLSchema.DATE);
+		Literal date = valueFactory.createLiteral(organization.getDate(), XMLSchema.DATE);
 		Literal headquarter = valueFactory.createLiteral(organization.getHeadquarter());
 		
 		connection.add(iri, RDF.TYPE, organizationType);
 		connection.add(iri, labelOntology, label);
 		connection.add(iri, descriptionOntology, description);
 		connection.add(iri, linkOntology, link);
-		connection.add(iri, dateOntology, time);
+		connection.add(iri, dateOntology, date);
 		connection.add(iri, headquarterOntology, headquarter);
 		
 		return iri;
@@ -137,13 +137,13 @@ public class DatabaseConnect {
 		Literal label = valueFactory.createLiteral(location.getLabel());
 		Literal description = valueFactory.createLiteral(location.getDescription());
 		Literal link = valueFactory.createLiteral(location.getLink());
-		Literal time = valueFactory.createLiteral(location.getDate(), XMLSchema.DATE);
+		Literal date = valueFactory.createLiteral(location.getDate(), XMLSchema.DATE);
 		
 		connection.add(iri, RDF.TYPE, locationType);
 		connection.add(iri, labelOntology, label);
 		connection.add(iri, descriptionOntology, description);
 		connection.add(iri, linkOntology, link);
-		connection.add(iri, dateOntology, time);
+		connection.add(iri, dateOntology, date);
 		
 		return iri;
 	}
@@ -153,13 +153,13 @@ public class DatabaseConnect {
 		Literal label = valueFactory.createLiteral(country.getLabel());
 		Literal description = valueFactory.createLiteral(country.getDescription());
 		Literal link = valueFactory.createLiteral(country.getLink());
-		Literal time = valueFactory.createLiteral(country.getDate(), XMLSchema.DATE);
+		Literal date = valueFactory.createLiteral(country.getDate(), XMLSchema.DATE);
 		
 		connection.add(iri, RDF.TYPE, countryType);
 		connection.add(iri, labelOntology, label);
 		connection.add(iri, descriptionOntology, description);
 		connection.add(iri, linkOntology, link);
-		connection.add(iri, dateOntology, time);
+		connection.add(iri, dateOntology, date);
 		
 		return iri;
 	}
@@ -185,13 +185,13 @@ public class DatabaseConnect {
 		Literal label = valueFactory.createLiteral(event.getLabel());
 		Literal description = valueFactory.createLiteral(event.getDescription());
 		Literal link = valueFactory.createLiteral(event.getLink());
-		Literal time = valueFactory.createLiteral(event.getDate(), XMLSchema.DATE);
+		Literal date = valueFactory.createLiteral(event.getDate(), XMLSchema.DATE);
 		
 		connection.add(iri, RDF.TYPE, eventType);
 		connection.add(iri, labelOntology, label);
 		connection.add(iri, descriptionOntology, description);
 		connection.add(iri, linkOntology, link);
-		connection.add(iri, dateOntology, time);
+		connection.add(iri, dateOntology, date);
 		
 		return iri;
 	}
@@ -240,10 +240,14 @@ public class DatabaseConnect {
 	public long queryStatementTime(IRI subject, IRI predicate, IRI object, Resource context) {
 		long startTime = System.currentTimeMillis();
 		RepositoryResult<Statement> statements = connection.getStatements(subject, predicate, object, context);
+	
 		long endTime = System.currentTimeMillis();
+		//Model model = QueryResults.asModel(statements);
+		//Rio.write(model, System.out, RDFFormat.TURTLE);
 		statements.close();
 		return endTime - startTime;
 	}
+	
 
 	public IRI getLabelOntology() {
 		return labelOntology;

@@ -9,7 +9,6 @@ import java.util.Random;
 
 import org.eclipse.rdf4j.model.IRI;
 
-import com.virtuoso.constants.FileName;
 import com.virtuoso.entity.Entity;
 import com.virtuoso.generateentity.GenRandomEntity;
 import com.virtuoso.relationship.GenRelationship;
@@ -22,49 +21,51 @@ public class DatabaseGeneration {
 	
 	private static int noLink = 1000;
 	private static int noDate = 1000;
-	private static String startDate = "2011-01-01";
+
 	
 	private static FileName fileName = new FileName();
-	private static String personLabelFileName = fileName.getCountryLabel();
-	private static String personDescriptionFileName = fileName.getPersonDescription();;
 	
-	private static String organizationLabelFileName = fileName.getOrganizationLabel();
-	private static String organizationDescriptionFileName = fileName.getOrganizationDesciption();
-	private static String headquarterFileName = fileName.getHeadquarter();
+	private static String personLabelFileName = fileName.PERSONLABEL;
+	private static String personDescriptionFileName = fileName.PERSONDESCRIPTION;
+	private static String personStatusFileName = fileName.PERSONSTATUS;
 	
-	private static String countryLabelFileName = fileName.getCountryLabel();
-	private static String countryDescriptionFileName = fileName.getCountryDescription();
+	private static String organizationLabelFileName = fileName.ORGANIZATIONLABEL;
+	private static String organizationDescriptionFileName = fileName.ORGANIZATIONDESCRIPTION;
+	private static String headquarterFileName = fileName.HEADQUARTER;
 	
-	private static String locationLabelFileName = fileName.getLocationLabel();
-	private static String locationDescriptionFileName = fileName.getLocationDescription();
+	private static String countryLabelFileName = fileName.COUNTRYLABEL;
+	private static String countryDescriptionFileName = fileName.COUNTRYDESCRIPTION;
+	private static String countryContinentFileName = fileName.COUNTRYCONTINENT;
 	
-	private static String timeLabelFileName = fileName.getTimeLabel();
-	private static String timeDescriptionFileName = fileName.getTimeDescription();
+	private static String locationLabelFileName = fileName.LOCATIONLABEL;
+	private static String locationDescriptionFileName = fileName.LOCATIONDESCRIPTION;
 	
-	private static String eventLabelFileName = fileName.getEventLabel();
-	private static String eventDescriptionFileName = fileName.getEventDescription();
+	private static String timeLabelFileName = fileName.TIMELABEL;
+	private static String timeDescriptionFileName = fileName.TIMEDESCRIPTION;
 	
-	private DatabaseConnect databaseConnect;
+	private static String eventLabelFileName = fileName.EVENTLABEL;
+	private static String eventDescriptionFileName = fileName.EVENTDESCRIPTION;
+	
+	private DatabaseConnection databaseConnect;
 	private GenRandomEntity genRandomEntity;
 	private GenRelationship genRelationship;
 	
 	private List<IRI> entityIRIList;
 	
 	public DatabaseGeneration() throws FileNotFoundException {
-		databaseConnect = new DatabaseConnect();
+		databaseConnect = new DatabaseConnection();
 		genRandomEntity = new GenRandomEntity();
 		genRelationship = new GenRelationship();
 		
-		
-		genRandomEntity.setEntityGeneration(noLink, noDate, startDate);
-		genRandomEntity.setPersonGeneration(personLabelFileName, personDescriptionFileName);
+		genRandomEntity.setEntityGeneration(noLink, noDate);
+		genRandomEntity.setPersonGeneration(personLabelFileName, personDescriptionFileName, personStatusFileName);
 		genRandomEntity.setOrganizationGeneration(organizationLabelFileName, organizationDescriptionFileName, headquarterFileName);
-		genRandomEntity.setCountryGeneration(countryLabelFileName, countryDescriptionFileName);
+		genRandomEntity.setCountryGeneration(countryLabelFileName, countryDescriptionFileName, countryContinentFileName);
 		genRandomEntity.setLocationGeneration(locationLabelFileName, locationDescriptionFileName);
 		genRandomEntity.setTimeGeneration(timeLabelFileName, timeDescriptionFileName);
 		genRandomEntity.setEventGeneration(eventLabelFileName, eventDescriptionFileName);
 		
-		genRelationship.setRelDescriptionList(fileName.getRelationshipDescription());
+		genRelationship.setRelDescriptionList(fileName.RELATIONSHIPDESCRIPTION);
 		
 		entityIRIList = new ArrayList<>();
 	}
@@ -101,7 +102,7 @@ public class DatabaseGeneration {
 		generateRelationship(numberOfRelationship);
 	}
 	
-	public DatabaseConnect getDatabaseConnect() {
+	public DatabaseConnection getDatabaseConnect() {
 		return databaseConnect;
 	}
 	
