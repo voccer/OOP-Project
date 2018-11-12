@@ -10,6 +10,8 @@ import com.virtuoso.entity.Country;
 
 public class GenCountry extends GenEntity{
 	private List<String> continentList = new ArrayList<String>();
+	private List<String> couLabelList =  new ArrayList<>();
+	private List<String> couDescList = new ArrayList<>();
 	
 	public void setContinentList(String fileName) throws FileNotFoundException {
 		Scanner scanner = new Scanner(new File(fileName));
@@ -23,7 +25,31 @@ public class GenCountry extends GenEntity{
 		return continentList.get((int)(Math.random() * continentList.size() + 0));
 	}
 	
+	@Override
+	public void setLabelList(String fileName) {
+		// TODO Auto-generated method stub
+		setList(fileName, couLabelList);
+	}
+
+	@Override
+	public void setDescriptionList(String fileName) {
+		// TODO Auto-generated method stub
+		setList(fileName, couDescList);
+	}
+
+	@Override
+	public String getRandomLabel() {
+		// TODO Auto-generated method stub
+		return couLabelList.get((int)(Math.random() * couLabelList.size() + 0));
+	}
+
+	@Override
+	public String getRandomDescription() {
+		// TODO Auto-generated method stub
+		return couDescList.get((int)(Math.random() * couDescList.size() + 0));
+	}
+
 	public Country genCountry() {
-		return new Country(getRandomLabel(), getRandomDescription(), getRandomLink(), getRandomDate());
+		return new Country(this.getRandomLabel(), this.getRandomDescription(), getRandomLink(), getRandomDate(), getRandomContinent());
 	}
 }

@@ -55,13 +55,13 @@ public class DatabaseGeneration {
 		genRandomEntity = new GenRandomEntity();
 		genRelationship = new GenRelationship();
 		
-		genRandomEntity.setEntityGeneration(noLink, noDate);
-		genRandomEntity.setPersonGeneration(personLabelFileName, personDescriptionFileName, personStatusFileName);
-		genRandomEntity.setOrganizationGeneration(organizationLabelFileName, organizationDescriptionFileName, organizationHeadquarterFileName);
-		genRandomEntity.setCountryGeneration(countryLabelFileName, countryDescriptionFileName, countryContinentFileName);
-		genRandomEntity.setLocationGeneration(locationLabelFileName, locationDescriptionFileName);
-		genRandomEntity.setTimeGeneration(timeLabelFileName, timeDescriptionFileName);
-		genRandomEntity.setEventGeneration(eventLabelFileName, eventDescriptionFileName);
+		genRandomEntity.setEntities(noLink, noDate);
+		genRandomEntity.setPeople(personLabelFileName, personDescriptionFileName, personStatusFileName);
+		genRandomEntity.setOrganizations(organizationLabelFileName, organizationDescriptionFileName, organizationHeadquarterFileName);
+		genRandomEntity.setCountries(countryLabelFileName, countryDescriptionFileName, countryContinentFileName);
+		genRandomEntity.setLocations(locationLabelFileName, locationDescriptionFileName);
+		genRandomEntity.setTime(timeLabelFileName, timeDescriptionFileName);
+		genRandomEntity.setEvents(eventLabelFileName, eventDescriptionFileName);
 		
 		genRelationship.setRelDescriptionList(fileName.RELATIONSHIP_DESCRIPTION);
 		
@@ -72,7 +72,7 @@ public class DatabaseGeneration {
 		if(numberOfEntity > noEntity) {
 			Entity entity = null;
 			for(int i = 0; i < numberOfEntity - noEntity; i++) {
-				entity = genRandomEntity.generateRandomEntity();
+				entity = genRandomEntity.genRandomEntity();
 				entityIRIList.add(databaseConnect.insertEntity(entity));
 			}
 		}

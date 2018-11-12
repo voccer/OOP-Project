@@ -2,80 +2,92 @@ package com.virtuoso.generateentity;
 
 
 import java.io.FileNotFoundException;
-import java.util.Random;
 
 import com.virtuoso.entity.Entity;
 
 public class GenRandomEntity {
-	private static final Random RANDOM = new Random();
-	private static final GenEntity ENTITY_GENERATION = new GenEntity();
-	private static final GenPerson PERSON_GENERATION = new GenPerson();
-	private static final GenOrganization ORGANIZATION_GENERATION = new GenOrganization();
-	private static final GenLocation LOCATION_GENERATION = new GenLocation();
-	private static final GenTime TIME_GENERATION = new GenTime();
-	private static final GenEvent EVENT_GENERATION = new GenEvent();
-	private static final GenCountry COUNTRY_GENERATION = new GenCountry();
-
+	private static GenEntity entities = new GenEntity();
+	private static final GenCountry COUNTRIES = new GenCountry();
+	private static final GenEvent EVENTS = new GenEvent();
+	private static final GenLocation LOCATIONS = new GenLocation();
+	private static final GenOrganization ORGANIZATIONS = new GenOrganization();
+	private static final GenPerson PEOPLE = new GenPerson();
+	private static final GenTime TIME_LIST = new GenTime();
+	
 	public GenRandomEntity() {
 	}
 
-	public void setEntityGeneration(int noLink, int noDate) {
-		ENTITY_GENERATION.setDateList(noDate);
-		ENTITY_GENERATION.setLinkList(noLink);	
+	public void setEntities(int numberOfLinks, int numberOfDates) {
+		entities.setDateList(numberOfDates);
+		entities.setLinkList(numberOfLinks);	
 	}
 	
-	public void setPersonGeneration(String personLabelFileName, String personDescriptionFileName, String personStatusFileName) throws FileNotFoundException {
-		PERSON_GENERATION.setDescriptionList(personDescriptionFileName);
-		PERSON_GENERATION.setLabelList(personLabelFileName);
-		PERSON_GENERATION.setStatusList(personStatusFileName);
+	public void setPeople(String personLabelFileName, String personDescriptionFileName, String personStatusFileName) {
+		try {
+			PEOPLE.setDescriptionList(personDescriptionFileName);
+			PEOPLE.setLabelList(personLabelFileName);
+			PEOPLE.setStatusList(personStatusFileName);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void setOrganizationGeneration(String organizationLabelFileName, String organizationDescriptionFileName,
-			String headquarterFileName) throws FileNotFoundException {
-		ORGANIZATION_GENERATION.setLabelList(organizationLabelFileName);
-		ORGANIZATION_GENERATION.setDescriptionList(organizationDescriptionFileName);
-		ORGANIZATION_GENERATION.setHeadquarterList(headquarterFileName);
+	public void setOrganizations(String organizationLabelFileName, String organizationDescriptionFileName, String headquarterFileName){
+		try {
+			ORGANIZATIONS.setLabelList(organizationLabelFileName);
+			ORGANIZATIONS.setDescriptionList(organizationDescriptionFileName);
+			ORGANIZATIONS.setHeadquarterList(headquarterFileName);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void setLocationGeneration(String locationLabelFileName, String locationDescriptionFileName) throws FileNotFoundException {
-		LOCATION_GENERATION.setDescriptionList(locationDescriptionFileName);
-		LOCATION_GENERATION.setLabelList(locationLabelFileName);
+	public void setLocations(String locationLabelFileName, String locationDescriptionFileName) {
+		LOCATIONS.setDescriptionList(locationDescriptionFileName);
+		LOCATIONS.setLabelList(locationLabelFileName);	
 	}
 
-	public void setTimeGeneration(String timeLabelFileName, String timeDescriptionFileName) throws FileNotFoundException {
-		TIME_GENERATION.setDescriptionList(timeDescriptionFileName);
-		TIME_GENERATION.setLabelList(timeLabelFileName);
+	public void setTime(String timeLabelFileName, String timeDescriptionFileName) {
+		TIME_LIST.setDescriptionList(timeDescriptionFileName);
+		TIME_LIST.setLabelList(timeLabelFileName);	
 	}
 
-	public void setEventGeneration(String eventLabelFileName, String eventDescriptionFileName) throws FileNotFoundException {
-		EVENT_GENERATION.setDescriptionList(eventDescriptionFileName);
-		EVENT_GENERATION.setLabelList(eventLabelFileName);
+	public void setEvents(String eventLabelFileName, String eventDescriptionFileName) {
+		EVENTS.setDescriptionList(eventDescriptionFileName);
+		EVENTS.setLabelList(eventLabelFileName);	
 	}
 	
 	// Thiếu Continent file, bổ sung continent file thì thêm tham số vào đây.
 	
-	public void setCountryGeneration(String countryLabelFileName, String countryDescriptionFileName, String countryContinentFileName) throws FileNotFoundException {
-		COUNTRY_GENERATION.setLabelList(countryLabelFileName);
-		COUNTRY_GENERATION.setDescriptionList(countryDescriptionFileName);
-		COUNTRY_GENERATION.setContinentList(countryContinentFileName);
+	public void setCountries(String countryLabelFileName, String countryDescriptionFileName, String countryContinentFileName) {
+		try {
+			COUNTRIES.setLabelList(countryLabelFileName);
+			COUNTRIES.setDescriptionList(countryDescriptionFileName);
+			COUNTRIES.setContinentList(countryContinentFileName);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public Entity generateRandomEntity() {
-		int random = RANDOM.nextInt(6);
+	public Entity genRandomEntity() {
+		int random = (int) (Math.random() * 6 + 0);
 
 		switch (random) {
 		case 0:
-			return PERSON_GENERATION.genPerson();
+			return PEOPLE.genPerson();
 		case 1:
-			return ORGANIZATION_GENERATION.genOrganization();
+			return ORGANIZATIONS.genOrganization();
 		case 2:
-			return LOCATION_GENERATION.genLocation();
+			return LOCATIONS.genLocation();
 		case 3:
-			return TIME_GENERATION.genTime();
+			return TIME_LIST.genTime();
 		case 4:
-			return EVENT_GENERATION.genEvent();
+			return EVENTS.genEvent();
 		case 5:
-			return COUNTRY_GENERATION.genCountry();
+			return COUNTRIES.genCountry();
 		default:
 			break;
 		}

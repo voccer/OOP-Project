@@ -11,9 +11,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GenEntity {
 	private static List<String> linkList = new ArrayList<String>();
 	private static List<String> dateList = new ArrayList<String>();
-	private static List<String> labelList = new ArrayList<String>();
-	private static List<String> descriptionList = new ArrayList<String>();
-	private String prefix = "http://www.example.com/link#";
+
+	private String prefix = "http://www.example.org/link#";
 	
 	public void setLinkList(int numberOfLinks) {
 		for (int i = 0; i < numberOfLinks; i++) {
@@ -55,29 +54,33 @@ public class GenEntity {
 		return dateList.get((int)(Math.random() * dateList.size() + 0));
 	}
 	
-	public void setLabelList(String fileName) throws FileNotFoundException {
-		Scanner scanner = new Scanner(new File(fileName));
-		while (scanner.hasNextLine()) {
-			labelList.add(scanner.nextLine());
+	public void setList(String fileName, List<String> entityList) {
+		Scanner scanner;
+		try {
+			scanner = new Scanner(new File(fileName));
+			while (scanner.hasNextLine()) {
+				entityList.add(scanner.nextLine());
+			}
+			scanner.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		scanner.close();
 	}
 	
-	public void setDescriptionList(String fileName) throws FileNotFoundException {
-		Scanner scanner = new Scanner(new File(fileName));
-		while (scanner.hasNextLine()) {
-			descriptionList.add(scanner.nextLine());
-			
-		}
-		scanner.close();
+	public void setLabelList(String fileName) {
+
+	}
+	
+	public void setDescriptionList(String fileName) {
+		
 	}
 	
 	public String getRandomLabel() {
-		return labelList.get((int)(Math.random() * labelList.size() + 0));
+		return prefix;
 	}
 
 	public String getRandomDescription() {
-		return descriptionList.get((int)(Math.random() * descriptionList.size() + 0));
-		
+		return prefix;
 	}
 }

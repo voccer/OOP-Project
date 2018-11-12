@@ -7,10 +7,10 @@ public class Country extends Entity{
 	private int countryId;
 	private String continent;
 	
-	public Country(String label, String description, String link, String time) {
+	public Country(String label, String description, String link, String time, String continent) {
 		super(label, description, link, time);
 		// TODO Auto-generated constructor stub
-		//this.continent = continent;
+		this.continent = continent;
 		countryId = count.incrementAndGet();
 	}
 
