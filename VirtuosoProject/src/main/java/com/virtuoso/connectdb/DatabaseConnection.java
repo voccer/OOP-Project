@@ -29,9 +29,8 @@ public class DatabaseConnection {
 	private static final String USERNAME = "dba";
 	private static final String PASSWORD = "dba";
 	
-	//Bộ namespace chuẩn bị khởi tạo
+	//Initialize namespace
 	private static String ontologyNamespace = "http://www.example.com/ontology/";
-	
 	private static String personNamespace = "http://www.example.com/person/";
 	private static String organizationNamespace = "http://www.example.com/organization/";
 	private static String locationNamespace = "http://www.example.com/location/";
@@ -40,7 +39,7 @@ public class DatabaseConnection {
 	private static String eventNamespace = "http://www.example.com/event/";
 	private static String relationshipNamespace = "http://www.example.com/relationship/";
 	
-	//Bo ket noi va sinh IRI
+	//Connect and generate IRI
 	private RepositoryConnection connection = null;
 	private ValueFactory valueFactory = null;
 	

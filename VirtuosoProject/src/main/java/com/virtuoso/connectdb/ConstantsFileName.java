@@ -1,6 +1,6 @@
 package com.virtuoso.connectdb;
 
-public class FileName {
+public class ConstantsFileName {
 
 	final String COUNTRY_DESCRIPTION = "src/main/java/com/virtuoso/filegen/countryDescription.txt";
 	final String COUNTRY_LABEL = "src/main/java/com/virtuoso/filegen/countryLabel.txt";

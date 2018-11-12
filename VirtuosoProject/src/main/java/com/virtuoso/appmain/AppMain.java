@@ -22,7 +22,7 @@ public class AppMain {
 		
 		System.exit(1);
 		for(int i = 0; i < 5; i++) {
-			databaseGeneration.generateDatabase(n[i], m[i]);
+			databaseGeneration.genDB(n[i], m[i]);
 			long time = databaseGeneration.getDatabaseConnect().queryStatementTime(null, RDF.TYPE, databaseGeneration.getDatabaseConnect().getPersonType(), null);
 			System.out.println("Time to query in " + n[i] + " entities and " + m[i] + " relationship is " + time);
 		}

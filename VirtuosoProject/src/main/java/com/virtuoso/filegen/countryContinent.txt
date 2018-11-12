@@ -1,7 +1,7 @@
-Asia
-Africa
-Antarctica
-Australia
-Europe
-North America
-South America
+Châu Á
+Châu Phi
+Châu Úc
+Châu Âu
+Bắc Mỹ
+Nam Mỹ
+Nam Cực
