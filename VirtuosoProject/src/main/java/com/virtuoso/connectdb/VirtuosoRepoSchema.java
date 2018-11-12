@@ -18,21 +18,21 @@ public class VirtuosoRepoSchema {
 
 	ValueFactory valueFactory =  conn.getValueFactory();
 	
-	IRI LABEL;
-	IRI DESCRIPTION;
-	IRI DATE;
-	IRI LINK;
-	IRI STATUS;
-	IRI CONTINENT;
-	IRI HEADQUARTER;
+	protected IRI LABEL;
+	protected IRI DESCRIPTION;
+	protected IRI DATE;
+	protected IRI LINK;
+	protected IRI STATUS;
+	protected IRI CONTINENT;
+	protected IRI HEADQUARTER;
 	
-	IRI PERSON;
-	IRI COUNTRY;
-	IRI EVENT;
-	IRI TIME;
-	IRI LOCATION;
-	IRI ORGANIZATION;
-	IRI RELATIONSHIP;
+	protected IRI PERSON;
+	protected IRI COUNTRY;
+	protected IRI EVENT;
+	protected IRI TIME;
+	protected IRI LOCATION;
+	protected IRI ORGANIZATION;
+	protected IRI RELATIONSHIP;
 	
 	public void createSchema() {
 		LABEL = valueFactory.createIRI(NAMESPACE, "label");
