@@ -8,11 +8,14 @@ import org.eclipse.rdf4j.repository.RepositoryConnection;
 import virtuoso.rdf4j.driver.VirtuosoRepository;
 
 public class VirtuosoRepoSchema {
+	
 	private static final String URL = "jdbc:virtuoso://localhost:1111/";
 	private static final String USERNAME = "dba";
 	private static final String PASSWORD = "dba";
 	
 	final String NAMESPACE = "http://example.com/virtuoso#";
+	
+	
 	Repository myRepository = new VirtuosoRepository(URL, USERNAME, PASSWORD);
 	RepositoryConnection conn = myRepository.getConnection();
 
@@ -34,7 +37,7 @@ public class VirtuosoRepoSchema {
 	protected IRI ORGANIZATION;
 	protected IRI RELATIONSHIP;
 	
-	public void createSchema() {
+	public  VirtuosoRepoSchema() {
 		LABEL = valueFactory.createIRI(NAMESPACE, "label");
 		DESCRIPTION = valueFactory.createIRI(NAMESPACE, "description");
 		DATE = valueFactory.createIRI(NAMESPACE, "date");

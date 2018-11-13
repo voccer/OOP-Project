@@ -22,6 +22,7 @@ public class DBGeneration {
 	private GenRandomEntity genRandomEntity = new GenRandomEntity();
 	private GenRelationship genRelationship = new GenRelationship();
 	
+	
 	private List<IRI> entityIRIList;
 	
 	public DBGeneration() throws FileNotFoundException {
@@ -35,6 +36,8 @@ public class DBGeneration {
 		genRandomEntity.setEvents(fileName.EVENT_LABEL, fileName.EVENT_DESCRIPTION);
 		
 		genRelationship.setRelDescriptionList(fileName.RELATIONSHIP_DESCRIPTION);
+		
+		//virtuosoReposchema.createSchema();
 		
 		entityIRIList = new ArrayList<>();
 	}
@@ -51,6 +54,7 @@ public class DBGeneration {
 	}
 	
 	private void genRelationships(int nRels) {
+		
 		if(nRels > numberOfRelationships) {
 			IRI entity1 = null;
 			IRI entity2 = null;
@@ -59,16 +63,21 @@ public class DBGeneration {
 			for(int i = 0; i < nRels - numberOfRelationships; i++) {
 				entity1 = entityIRIList.get((int) (Math.random() * numberOfEntities + 0));
 				entity2 = entityIRIList.get((int) (Math.random() * numberOfEntities + 0));
+				
 				relationship = entitiesIRI.createRelIRI(genRelationship.genRandomRelDesc());
 				entitiesIRI.addStatement(entity1, relationship, entity2);
+				
 			}
 		}
 		numberOfRelationships = nRels;
+		
 	}
 	
 	public void genDB(int nEntities, int nRels) {
 		genEntities(nEntities);
+		
 		genRelationships(nRels);
+		
 	}
 	
 	public CreateEntitiesIRI getDatabaseConnect() {

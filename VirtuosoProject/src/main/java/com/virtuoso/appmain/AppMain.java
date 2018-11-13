@@ -15,15 +15,19 @@ public class AppMain {
 		int[] m = {200, 7000, 80000, 2000000, 17000000};
 		long startTime = System.currentTimeMillis();
 		DBGeneration genDB = new DBGeneration();
-		genDB.clearStatements();
+
 		long endTime = System.currentTimeMillis();
 		
+	
 		System.out.println("Time to init DatabaseGeneration: " + (endTime - startTime));
 		
-		System.exit(1);
-		for(int i = 0; i < 5; i++) {
+		
+		for(int i = 0; i < 2; i++) {
+			
 			genDB.genDB(n[i], m[i]);
+			
 			long time = genDB.getDatabaseConnect().queryStatementTime(null, RDF.TYPE, genDB.getDatabaseConnect().getPERSON(), null);
+			
 			System.out.println("Time to query for " + n[i] + " entities and " + m[i] + " relationship is " + time);
 		}
 		System.out.println("End");

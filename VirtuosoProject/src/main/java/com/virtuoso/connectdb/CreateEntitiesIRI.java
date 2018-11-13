@@ -16,6 +16,11 @@ import com.virtuoso.entity.Person;
 import com.virtuoso.entity.Time;
 
 public class CreateEntitiesIRI extends VirtuosoRepoSchema {	
+	public CreateEntitiesIRI() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public IRI createPersonIRI(Person person) {
 		IRI personIRI = valueFactory.createIRI(PERSON.toString(), Integer.toString(person.getPersonId()));
 		
@@ -57,13 +62,13 @@ public class CreateEntitiesIRI extends VirtuosoRepoSchema {
 	}
 	
 	public IRI createEventIRI(Event event) {
-		IRI eventIRI = valueFactory.createIRI(EVENT.toString(), Integer.toString(event.getEventId()));
+		IRI eventIRI = valueFactory.createIRI(PERSON.toString(), Integer.toString(event.getEventId()));
 		
 		Literal label = valueFactory.createLiteral(event.getLabel());
 		Literal desc = valueFactory.createLiteral(event.getDescription());
 		Literal link = valueFactory.createLiteral(event.getLink());
 		Literal date = valueFactory.createLiteral(event.getDate());
-		
+	
 		//add new statement to database
 		conn.add(eventIRI, RDF.TYPE, EVENT);
 		conn.add(eventIRI, LABEL, label);
@@ -102,6 +107,7 @@ public class CreateEntitiesIRI extends VirtuosoRepoSchema {
 		Literal link = valueFactory.createLiteral(time.getLink());
 		Literal date = valueFactory.createLiteral(time.getDate());
 		
+	
 		//add new statement to database
 		conn.add(timeIRI, RDF.TYPE, TIME);
 		conn.add(timeIRI, LABEL, label);
@@ -119,7 +125,7 @@ public class CreateEntitiesIRI extends VirtuosoRepoSchema {
 		Literal desc = valueFactory.createLiteral(location.getDescription());
 		Literal link = valueFactory.createLiteral(location.getLink());
 		Literal date = valueFactory.createLiteral(location.getDate());
-		
+	
 		//add new statement to database
 		conn.add(locIRI, RDF.TYPE, LOCATION);
 		conn.add(locIRI, LABEL, label);
@@ -154,6 +160,7 @@ public class CreateEntitiesIRI extends VirtuosoRepoSchema {
 	
 	public IRI createRelIRI(String relDesc) {
 		IRI relIRI = valueFactory.createIRI(RELATIONSHIP.toString(), relDesc);
+		
 		return relIRI;
 	}
 	
