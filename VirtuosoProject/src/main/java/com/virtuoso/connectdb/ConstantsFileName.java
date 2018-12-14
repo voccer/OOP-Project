@@ -24,7 +24,12 @@ public class ConstantsFileName {
 	protected final String TIME_DESCRIPTION = "src/main/java/com/virtuoso/filegen/timeDescription.txt";
 	protected final String TIME_LABEL = "src/main/java/com/virtuoso/filegen/timeLabel.txt";
 	
-	protected final String RELATIONSHIP_DESCRIPTION = "src/main/java/com/virtuoso/filegen/relationshipDescription.txt";
-	
-	
+	protected final String RELATIONSHIP_OTHER = "src/main/java/com/virtuoso/filegen/relationshipDescription.txt";
+	protected final String RELATIONSHIP_PERPER = "";
+	protected final String RELATIONSHIP_PER_ORGEVE = "";
+	protected final String RELATIONSHIP_CTYCTY = "";
+	protected final String RELATIONSHIP_ORGEVE_TIM = "";
+	protected final String RELATIONSHIP_EVE_LOCCTY = "";
+	protected final String RELATIONSHIP_PERCTY_CTYEVE = "";
+	protected final String RELATIONSHIP_LOCORG = "";
 }

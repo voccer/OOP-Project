@@ -135,30 +135,6 @@ public class CreateEntitiesIRI extends VirtuosoRepoSchema {
 		
 		return locIRI;
 	}
-//	
-//	public IRI createEntityIRI(Entity entity) {
-//		if (entity instanceof Person) {
-//			return createPersonIRI((Person) entity);
-//		}
-//		else if (entity instanceof Organization) {
-//			return createOrganizationIRI((Organization) entity);
-//		}
-//		else if (entity instanceof Country) {
-//			return createCountryIRI((Country) entity);
-//		}
-//		else if (entity instanceof Event) {
-//			return createEventIRI((Event) entity);
-//		}
-//		else if (entity instanceof Time) {
-//			return createTimeIRI((Time) entity);
-//		}
-//		else if (entity instanceof Location) {
-//			return createLocationIRI((Location) entity);
-//		}
-//		else {
-//			return null;
-//		}
-//	}
 	
 	public IRI createRelIRI(String relDesc) {
 		IRI relIRI = valueFactory.createIRI(RELATIONSHIP.toString(), relDesc);
@@ -169,6 +145,32 @@ public class CreateEntitiesIRI extends VirtuosoRepoSchema {
 	public void addStatement(IRI entity1, IRI rel, IRI entity2) {
 		conn.add(entity1, rel, entity2);
 	}
+//	
+	public IRI createEntityIRI(Entity entity) {
+		if (entity instanceof Person) {
+			return createPersonIRI((Person) entity);
+		}
+		else if (entity instanceof Organization) {
+			return createOrganizationIRI((Organization) entity);
+		}
+		else if (entity instanceof Country) {
+			return createCountryIRI((Country) entity);
+		}
+		else if (entity instanceof Event) {
+			return createEventIRI((Event) entity);
+		}
+		else if (entity instanceof Time) {
+			return createTimeIRI((Time) entity);
+		}
+		else if (entity instanceof Location) {
+			return createLocationIRI((Location) entity);
+		}
+		else {
+			return null;
+		}
+	}
+	
+	
 	
 //	public long queryStatementTime(IRI subject, IRI predicate, IRI object, Resource context) {
 //		long startTime = System.currentTimeMillis();

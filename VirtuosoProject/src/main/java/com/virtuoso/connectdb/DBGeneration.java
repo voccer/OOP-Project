@@ -23,11 +23,18 @@ public class DBGeneration {
 	private static int numberOfDates = 10000;
 
 	private static ConstantsFileName fileName = new ConstantsFileName();	
-	
-	private EntityIRI entityIRI = new EntityIRI();
+
 	private GenRandomEntity genRandomEntity = new GenRandomEntity();
-	private GenRelationship genRelationship = new GenRelationship();
-//	private GenRelationship genRelationshipPerPer = new GenRelationship();
+	
+	private GenRelationship genRelOther = new GenRelationship();
+	private GenRelationship genRelPerPer = new GenRelationship();
+	private GenRelationship genRelPer_OrgEve = new GenRelationship();
+	private GenRelationship genRelCtyCty = new GenRelationship();
+	private GenRelationship genRelOrgEve_Time = new GenRelationship();
+	private GenRelationship genRelEve_LocCty = new GenRelationship();
+	private GenRelationship genRelPerCty_CtyEve = new GenRelationship();
+	private GenRelationship genRelLocOrg = new GenRelationship();
+
 	private CreateEntitiesIRI entitiesIRI = new CreateEntitiesIRI();
 	
 	
@@ -37,7 +44,7 @@ public class DBGeneration {
 	private List<IRI> eventIRIList;
 	private List<IRI> timeIRIList;
 	private List<IRI> countryIRIList;
-//	private List<IRI> entitiesIRIList;
+	private List<IRI> entitiesIRIList;
 	
 	public DBGeneration() throws FileNotFoundException {
 		
@@ -49,7 +56,15 @@ public class DBGeneration {
 		genRandomEntity.setTime(fileName.TIME_LABEL, fileName.LOCATION_DESCRIPTION);
 		genRandomEntity.setEvents(fileName.EVENT_LABEL, fileName.EVENT_DESCRIPTION);
 		
-		genRelationship.setRelDescriptionList(fileName.RELATIONSHIP_DESCRIPTION);
+		genRelOther.setRelDescriptionList(fileName.RELATIONSHIP_OTHER);
+		genRelPerPer.setRelDescriptionList(fileName.RELATIONSHIP_PERPER);
+		genRelPer_OrgEve.setRelDescriptionList(fileName.RELATIONSHIP_PER_ORGEVE);
+		genRelCtyCty.setRelDescriptionList(fileName.RELATIONSHIP_CTYCTY);
+		genRelOrgEve_Time.setRelDescriptionList(fileName.RELATIONSHIP_ORGEVE_TIM);
+		genRelEve_LocCty.setRelDescriptionList(fileName.RELATIONSHIP_EVE_LOCCTY);
+		genRelPerCty_CtyEve.setRelDescriptionList(fileName.RELATIONSHIP_PERCTY_CTYEVE);
+		genRelLocOrg.setRelDescriptionList(fileName.RELATIONSHIP_LOCORG);
+		
 		personIRIList = new ArrayList<>();
 		locIRIList = new ArrayList<>();
 		orgIRIList = new ArrayList<>();
@@ -64,26 +79,27 @@ public class DBGeneration {
 			Entity entity = null;
 			for(int i = 0; i < nEntitites - numberOfEntities; i++) {
 				entity = genRandomEntity.genRandomEntity();
-
+				IRI entityIRI = entitiesIRI.createEntityIRI(entity);
+				entitiesIRIList.add(entityIRI);
 				if (entity instanceof Person) {
-					personIRIList.add(entitiesIRI.createPersonIRI((Person) entity));
+					personIRIList.add(entityIRI);
 				}
 				else if (entity instanceof Organization) {
-					orgIRIList.add(entitiesIRI.createOrganizationIRI((Organization) entity));
+					orgIRIList.add(entityIRI);
 				}
 				else if (entity instanceof Location) {
-					locIRIList.add(entitiesIRI.createLocationIRI((Location) entity));
+					locIRIList.add(entityIRI);
 				}
 				else if (entity instanceof Time) {
-					timeIRIList.add(entitiesIRI.createTimeIRI((Time) entity));
+					timeIRIList.add(entityIRI);
 				}
 				else if (entity instanceof Event) {
-					eventIRIList.add(entitiesIRI.createEventIRI((Event) entity));
+					eventIRIList.add(entityIRI);
 				}
 				else if (entity instanceof Country) {
-					countryIRIList.add(entitiesIRI.createCountryIRI((Country) entity));
+					countryIRIList.add(entityIRI);
 				}
-//				entitiesIRIList.add(entityIRI.createEntityIRI(entity));
+				
 			}
 		}
 		numberOfEntities = nEntitites;
@@ -92,28 +108,71 @@ public class DBGeneration {
 	private void genRelationships(int nRels) {	
 		if(nRels > numberOfRelationships) {
 			for(int i = 0; i < nRels - numberOfRelationships; i++) {
-//				IRI entity1 = entitiesIRIList.get((int) (Math.random() * numberOfEntities + 0));
-//				IRI entity2 = entitiesIRIList.get((int) (Math.random() * numberOfEntities + 0));	
-//				if (entity1 instanceof PersonIRI && entity2 instanceof PersonIRI) {
-//					IRI relationship = entitiesIRI.createRelIRI(genRelationship.genRandomRelDesc());
-//					entitiesIRI.addStatement(entity1, relationship, entity2); //full statement with 2 entities and relationship	
-//				}
-//				} else {
-//					IRI relationship = entitiesIRI.createRelIRI(genRelationship.genRandomRelDesc());
-//					entitiesIRI.addStatement(entity1, relationship, entity2);
-//				}
 				// create full statement with 2 entities and 1 corresponding relationship
-				int caseNumber = (int) (Math.random() * 0 + 0);
-				switch (caseNumber) {
-				case 0:
-					IRI per1 = personIRIList.get((int) (Math.random() * numberOfEntities + 0));
-					IRI per2 = personIRIList.get((int) (Math.random() * numberOfEntities + 0));
-					IRI relationship = entitiesIRI.createRelIRI(genRelationship.genRandomRelDesc());
-					entitiesIRI.addStatement(per1, relationship, per2);
-					break;
-				default:
+				IRI entity1 = entitiesIRIList.get((int) (Math.random() * numberOfEntities + 0));
+				IRI entity2 = entitiesIRIList.get((int) (Math.random() * numberOfEntities + 0));
+				if (personIRIList.contains(entity1) && personIRIList.contains(entity2)) {
+					IRI relationship = entitiesIRI.createRelIRI(genRelPerPer.genRandomRelDesc());
+					entitiesIRI.addStatement(entity1, relationship, entity2);
 					break;
 				}
+				else if (personIRIList.contains(entity1) && (orgIRIList.contains(entity2) || orgIRIList.contains(entity2))) {
+					IRI relationship = entitiesIRI.createRelIRI(genRelPer_OrgEve.genRandomRelDesc());
+					entitiesIRI.addStatement(entity1, relationship, entity2);
+					break;
+				}
+				else if (countryIRIList.contains(entity1) && countryIRIList.contains(entity2)) {
+					IRI relationship = entitiesIRI.createRelIRI(genRelCtyCty.genRandomRelDesc());
+					entitiesIRI.addStatement(entity1, relationship, entity2);
+					break;
+				}
+				else if ((orgIRIList.contains(entity1) || eventIRIList.contains(entity1)) && timeIRIList.contains(entity2)) {
+					IRI relationship = entitiesIRI.createRelIRI(genRelOrgEve_Time.genRandomRelDesc());
+					entitiesIRI.addStatement(entity1, relationship, entity2);
+					break;
+				}
+				else if (eventIRIList.contains(entity1) && (locIRIList.contains(entity2) || countryIRIList.contains(entity2))) {
+					IRI relationship = entitiesIRI.createRelIRI(genRelEve_LocCty.genRandomRelDesc());
+					entitiesIRI.addStatement(entity1, relationship, entity2);
+					break;
+				}
+				else if ((personIRIList.contains(entity1) || countryIRIList.contains(entity1)) && (countryIRIList.contains(entity2) || eventIRIList.contains(entity2))) {
+					IRI relationship = entitiesIRI.createRelIRI(genRelPerCty_CtyEve.genRandomRelDesc());
+					entitiesIRI.addStatement(entity1, relationship, entity2);
+					break;
+				}
+				else if (locIRIList.contains(entity1) && orgIRIList.contains(entity2)) {
+					IRI relationship = entitiesIRI.createRelIRI(genRelLocOrg.genRandomRelDesc());
+					entitiesIRI.addStatement(entity1, relationship, entity2);
+					break;
+				}
+				else {
+					IRI relationship = entitiesIRI.createRelIRI(genRelOther.genRandomRelDesc());
+					entitiesIRI.addStatement(entity1, relationship, entity2);
+					break;
+				}
+//				int caseNumber = (int) (Math.random() * 7 + 0);
+//				switch (caseNumber) {
+//				case 0:
+//					IRI per1 = personIRIList.get((int) (Math.random() * numberOfEntities + 0));
+//					IRI per2 = personIRIList.get((int) (Math.random() * numberOfEntities + 0));
+//					IRI relationship = entitiesIRI.createRelIRI(genRelPerPer.genRandomRelDesc());
+//					entitiesIRI.addStatement(per1, relationship, per2);
+//					break;
+//				case 1:
+//					
+//				case 2:
+//					
+//				case 3:
+//				
+//				case 4:
+//				
+//				case 5:
+//				
+//				case 6:
+//				default:
+//					break;
+//				}
 			}
 		}
 		numberOfRelationships = nRels;	
