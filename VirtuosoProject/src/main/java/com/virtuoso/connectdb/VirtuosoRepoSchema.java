@@ -1,7 +1,9 @@
 package com.virtuoso.connectdb;
 
 import org.eclipse.rdf4j.model.IRI;
+import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.ValueFactory;
+import org.eclipse.rdf4j.model.impl.TreeModel;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 
@@ -20,6 +22,7 @@ public class VirtuosoRepoSchema {
 	RepositoryConnection conn = myRepository.getConnection();
 
 	ValueFactory valueFactory =  conn.getValueFactory();
+	Model model = new TreeModel();
 	
 	protected IRI LABEL;
 	protected IRI DESCRIPTION;
@@ -126,5 +129,4 @@ public class VirtuosoRepoSchema {
 	public IRI getRELATIONSHIP() {
 		return RELATIONSHIP;
 	}
-	
 }

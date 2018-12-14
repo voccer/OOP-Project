@@ -73,8 +73,7 @@ public class GenRandomEntity {
 	}
 	
 	public Entity genRandomEntity() {
-		int random = (int) (Math.random() * 6 + 0);
-		
+		int random = (int) (Math.random() * 6 + 0);	
 		switch (random) {
 		case 0:
 			return PEOPLE.genPerson();
